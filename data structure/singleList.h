@@ -15,7 +15,7 @@ template<typename Type>
 class LinkedList {
 public:
 	LinkedList();
-	void insert(Type val, int pos);
+	bool insert(Type val, int pos);
 	void remove(Type val);
 	int size() const;
 	int find(const Type &val) const;
@@ -34,28 +34,35 @@ inline LinkedList<Type>::LinkedList() {
 }
 
 template<typename Type>
-void LinkedList<Type>::insert(Type val, int pos) {
+bool LinkedList<Type>::insert(Type val, int pos) {
 	if (pos < 0) {
 		cout << "The n must be positive" << endl;
-		return;
+		return 0;
 	}
 	ListNode<Type> *temp = head;
-	ListNode<Type> node = new ListNode<Type>(val);
-	if (pos == 0) {
-		node->next = temp;
+	ListNode<Type> *node = new ListNode<Type>(val);
+	if (head == NULL) {
+		head = node;
 		++length;
-		return;
+		return 1;
+	}
+	if (pos == 0) {
+		node->next= temp;
+		head = node;
+		++length;
+		return 1;
 	}
 	for (int i = 1; i != pos; ++i) {
 		temp = temp->next;
 	}
 	if (temp == NULL) {
 		cout << "insert failed" << endl;
-		return;
+		return 0;
 	}
 	node->next = temp->next;
 	temp->next = node;
 	++length;
+	return 1;
 }
 
 template<typename Type>
@@ -80,6 +87,7 @@ void LinkedList<Type>::remove(Type val)
 template<typename Type>
 inline int LinkedList<Type>::size() const
 {
+	cout << length << endl;
 	return length;
 }
 
@@ -96,6 +104,7 @@ int LinkedList<Type>::find(const Type & val) const
 		if (temp == NULL)
 			return -1;
 	}
+	cout << count << endl;
 	return count;
 }
 
@@ -114,12 +123,25 @@ void LinkedList<Type>::reserv()
 }
 
 template<typename Type>
-inline void LinkedList<Type>::print()
+void LinkedList<Type>::print()
 {
-
+	ListNode<Type> *temp = head;
+	while (temp != NULL) {
+		cout << temp->val << " ";//内置类型
+		temp = temp->next;
+	}
+	cout << endl;
 }
 
 template<typename Type>
 inline LinkedList<Type>::~LinkedList()
 {
+	ListNode<Type> *del = head;
+	while (head->next!= NULL) {
+		del = head->next;
+		head->next = del->next;
+		delete del;
+	}
+	delete head;
+	cout << "调用了析构函数" << endl;
 }
