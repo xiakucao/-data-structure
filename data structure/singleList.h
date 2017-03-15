@@ -111,6 +111,8 @@ int LinkedList<Type>::find(const Type & val) const
 template<typename Type>
 void LinkedList<Type>::reserv()
 {
+	if(head==NULL)
+            return;
 	ListNode<Type> *froTemp = head, *nextTemp = head->next, *temp;
 	while (nextTemp != NULL) {
 		temp = nextTemp->next;
