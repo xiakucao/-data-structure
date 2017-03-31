@@ -44,8 +44,16 @@ void BinTree::preorder(pNode &t) const
 	while (!p||stack.empty()) {
 		if (p != NULL) {
 			stack.push(p);
+			std::cout << p->key << " ";
+			p = p->left;
+		}
+		else {
+			p = stack.top();
+			stack.pop();
+			p = p->right;
 		}
 	}
+	std::cout << std::endl;
 }
 
 void BinTree::midorder(pNode &t) const
