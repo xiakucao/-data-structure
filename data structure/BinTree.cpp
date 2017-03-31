@@ -40,9 +40,10 @@ pNode BinTree::find(pNode root,T & data) const
 void BinTree::preorder(pNode &t) const
 {
 	std::stack<pNode> stack;
-	while (!t&&stack.empty()) {
-		if (t != NULL) {
-			stack.push(t);
+	pNode p = t;
+	while (!p||stack.empty()) {
+		if (p != NULL) {
+			stack.push(p);
 		}
 	}
 }
