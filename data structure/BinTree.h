@@ -10,7 +10,7 @@ typedef struct Node {
 class BinTree {
 public:
 	BinTree();
-	void CreatBinTree(pNode root);
+	pNode CreatBinTree(pNode root);
 	pNode find(pNode root,T data) const;
 	void preorder(pNode root) const;
 	void midorder(pNode root) const;
