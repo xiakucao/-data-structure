@@ -8,7 +8,7 @@ BinTree::BinTree()
 	root = NULL;
 }
 
-void BinTree::CreatBinTree(pNode root)
+pNode BinTree::CreatBinTree(pNode root)
 {
 	T temp;
 	while (std::cin >> temp) {
@@ -22,6 +22,7 @@ void BinTree::CreatBinTree(pNode root)
 			CreatBinTree(root->right);//层序创建树；
 		}
 	}
+	return root;
 }
 
 pNode BinTree::find(pNode root,T data) const
