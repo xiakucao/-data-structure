@@ -12,11 +12,11 @@ public:
 	BinTree();
 	void CreatBinTree(pNode root);
 	pNode find(pNode root,T data) const;
-	void preorder(pNode t) const;
-	void midorder(pNode t) const;
-	void postorder(pNode t) const;
-	void levelorder(pNode t) const;
-	int high(pNode t) const;
+	void preorder(pNode root) const;
+	void midorder(pNode root) const;
+	void postorder(pNode root) const;
+	void levelorder(pNode root) const;
+	int high(pNode root) const;
 	~BinTree();
 private:
 	pNode root;
