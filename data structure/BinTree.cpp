@@ -8,42 +8,40 @@ BinTree::BinTree()
 	root = NULL;
 }
 
-pNode BinTree::CreatBinTree(pNode root)
+void BinTree::CreatBinTree(pNode &root)
 {
 	T temp;
-	while (std::cin >> temp) {
-		if (temp == '#') {
-			root = NULL;
-		}
-		else {
-			root = new struct Node;
-			root->key = temp;
-			CreatBinTree(root->left);
-			CreatBinTree(root->right);//层序创建树；
-		}
-	}
-	return root;
-}
-
-pNode BinTree::find(pNode root,T data) const
-{
-	if (root == NULL) {
-		return NULL;
-	}
-	if (root->key == data) {
-		return root;
+	std::cin >> temp;
+	if (temp == '#') {
+		root = NULL;
 	}
 	else {
-		find(root->left, data);
-		find(root->right, data);//层序遍历查找
+		root = new struct Node;
+		root->key = temp;
+		CreatBinTree(root->left);
+		CreatBinTree(root->right);//前序创建树；
+	}
+}
+
+bool BinTree::find(pNode root,T data)
+{
+	if (root == NULL) {
+		return false;
+	}
+	if (root->key == data) {
+		return true;
+	}
+	else {
+		if (!find(root->left, data)) {
+			find(root->right, data);//前序遍历查找
+		}
 	}
 }
 
 //前序遍历
-void BinTree::preorder(pNode root) const
+void BinTree::preorder(pNode root)
 {
 	std::stack<pNode> stack;
-	//防止无意中修改root
 	pNode p = root;
 	while (p||!stack.empty()) {
 		if (p != NULL) {
@@ -61,7 +59,7 @@ void BinTree::preorder(pNode root) const
 }
 
 //中序遍历
-void BinTree::midorder(pNode root) const
+void BinTree::midorder(pNode root)
 {
 	std::stack<pNode> stack;
 	pNode p = root;
@@ -81,7 +79,7 @@ void BinTree::midorder(pNode root) const
 }
 
 //后序遍历
-void BinTree::postorder(pNode root) const
+void BinTree::postorder(pNode root)
 {
 	//后序遍历要先遍历左右子树再访问根
 	std::stack<pNode> stack;
@@ -92,7 +90,8 @@ void BinTree::postorder(pNode root) const
 			p = p->left;
 		}
 		while (!stack.empty() && stack.top()->right == p) {
-			std::cout << stack.top()->key << std::endl;
+			p = stack.top();//更新p的值
+			std::cout << p->key << std::endl;
 			stack.pop();
 		}
 		if (stack.empty()) {
@@ -103,7 +102,7 @@ void BinTree::postorder(pNode root) const
 }
 
 //层序遍历
-void BinTree::levelorder(pNode root) const
+void BinTree::levelorder(pNode root)
 {
 	std::queue<pNode> queue;
 	pNode p = root;
@@ -126,7 +125,7 @@ void BinTree::levelorder(pNode root) const
 }
 
 //求树的深度
-int BinTree::high(pNode root) const
+int BinTree::high(pNode root)
 {
 	//pNode p = root;没必要了，后面不需要更改root值
 	int h = 0, left = 0, right = 0;
@@ -136,7 +135,7 @@ int BinTree::high(pNode root) const
 	left = high(root->left);
 	right = high(root->right);
 	h = (left > right ? left : right) + 1;
-	return 0;
+	return h;
 }
 
 //析构函数
