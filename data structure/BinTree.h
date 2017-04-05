@@ -10,14 +10,13 @@ typedef struct Node {
 class BinTree {
 public:
 	BinTree();
-	pNode CreatBinTree(pNode root);
-	pNode find(pNode root,T data) const;
-	void preorder(pNode root) const;
-	void midorder(pNode root) const;
-	void postorder(pNode root) const;
-	void levelorder(pNode root) const;
-	int high(pNode root) const;
+	void CreatBinTree(pNode &root);
+	bool find(pNode root,T data);
+	void preorder(pNode root);
+	void midorder(pNode root);
+	void postorder(pNode root);
+	void levelorder(pNode root);
+	int high(pNode root);
 	~BinTree();
-private:
 	pNode root;
 };
